@@ -1,7 +1,11 @@
 import PptxGenerationService from './services/PptxGenerationService'
 import { Settings } from './interfaces'
 
-const ImagesPptx = async function(settings: Settings): Promise<string> {
+/**
+ * @returns {Promise} path to file
+ * @param settings
+ */
+export async function createPptx(settings: Settings): Promise<string> {
   console.time('::: PPTX generation')
   const service = new PptxGenerationService(
     settings.saveTo,
@@ -14,5 +18,3 @@ const ImagesPptx = async function(settings: Settings): Promise<string> {
   console.timeEnd('::: PPTX generation')
   return result
 }
-
-export default ImagesPptx

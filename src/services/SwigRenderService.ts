@@ -6,8 +6,18 @@ import { join as pathJoin } from 'path'
 const { writeFile } = promises
 
 export default class SwigRenderService {
+  /**
+   *
+   * @param workingDirectory
+   */
   constructor(private workingDirectory: string) {}
 
+  /**
+   *
+   * @param template
+   * @param data
+   * @param fileName
+   */
   public async renderTemplate(template: IncludeFile, data: TemplateData, fileName: string): Promise<boolean> {
     const options: SwigOptions = {
       locals: data,

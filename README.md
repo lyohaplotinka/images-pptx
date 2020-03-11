@@ -23,11 +23,16 @@ npm install --save images-pptx
 ### Usage
 Add it to your project:
 ```javascript
+// JavaScript
 const ImagesPptx = require('images-pptx')
+// TypeScript
+import * as ImagesPptx from 'images-pptx'
+// or, for TypeScript
+import { createPptx } from 'images-pptx';
 ```
 After that, you can use it like this:
 ```javascript
-await ImagesPptx(options)
+await ImagesPptx.createPptx(options)
 ```
 
 Options are:
@@ -42,7 +47,7 @@ Options are:
 
 Example usage:
 ```javascript
-await ImagesPptx({
+await ImagesPptx.createPptx({
   pictures: '/Users/username/Pictures',
   saveTo: '/Users/username/Presentation',
   pptxFileName: 'Our great party.pptx',

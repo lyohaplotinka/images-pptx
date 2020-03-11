@@ -9,6 +9,14 @@ export default class PptxGenerationService {
   private swigRenderer!: SwigRenderService
   private slides: any[] = []
 
+  /**
+   *
+   * @param workingDirectory
+   * @param filePatterns
+   * @param outFile
+   * @param extension
+   * @param native
+   */
   constructor(
     private workingDirectory: string,
     private filePatterns: FilePaths,

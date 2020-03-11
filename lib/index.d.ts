@@ -1,3 +1,6 @@
 import { Settings } from './interfaces';
-declare const ImagesPptx: (settings: Settings) => Promise<string>;
-export default ImagesPptx;
+/**
+ * @returns {Promise} path to file
+ * @param settings
+ */
+export declare function createPptx(settings: Settings): Promise<string>;

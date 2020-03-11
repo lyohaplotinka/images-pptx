@@ -52,17 +52,26 @@ export default class NativeLaunchService {
     }
   }
 
+  /**
+   * @returns {string} stdout
+   * @param command
+   */
   private asyncExec(command: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       exec(command, (error, stdout, stderr) => {
         if (stdout) console.log(stdout)
         if (stderr) console.error(stderr)
         if (error) reject(error)
-        resolve()
+        resolve(stdout)
       })
     })
   }
 
+  /**
+   * @returns {string} stdout
+   * @param from
+   * @param to
+   */
   public async copy(from: string, to: string): Promise<string> {
     const stats = await lstat(from)
     const command = stats.isDirectory()
@@ -71,12 +80,21 @@ export default class NativeLaunchService {
     return await this.asyncExec(command)
   }
 
+  /**
+   * @returns {string} stdout
+   * @param path
+   */
   public async rm(path: string): Promise<string> {
     const stats = await lstat(path)
     const command = stats.isDirectory() ? `${this.rmFolderCommand} "${path}"` : `${this.rmFileCommand} "${path}"`
     return await this.asyncExec(command)
   }
 
+  /**
+   * @returns {string} stdout
+   * @param what
+   * @param zipFile
+   */
   public async zip(what: string, zipFile: string): Promise<string> {
     if (this.osType === OS.WIN) return 'unavailable'
     const command = `cd "${what}" && ${this.zipCommand} "${zipFile}" .`

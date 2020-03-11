@@ -12,6 +12,11 @@ export default class FileStructureService {
   public pictures: string[] = []
   private command?: NativeLaunchService
 
+  /**
+   *
+   * @param workingDirectory
+   * @param native
+   */
   constructor(private workingDirectory: string, private native = false) {
     if (this.native) this.command = new NativeLaunchService()
   }
@@ -40,6 +45,10 @@ export default class FileStructureService {
       })
   }
 
+  /**
+   * @returns {boolean}
+   * @param slidesCount
+   */
   private async copySlides(slidesCount: number): Promise<boolean> {
     const promisesArray: Promise<void>[] = []
     for (let i = 0; i < slidesCount; i++) {
@@ -72,11 +81,16 @@ export default class FileStructureService {
       .catch(err => err)
   }
 
+  /**
+   *
+   * @param path
+   * @param extension
+   */
   public readFilesFromDirectory(path: string, extension: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       readdir(path)
         .then(allFiles => {
-          const regExp = new RegExp(`.${extension}`, 'g')
+          const regExp = new RegExp(`.${extension}`, 'gi')
           this.pictures = allFiles.reduce((total: string[], current: string) => {
             if (current.match(regExp)) {
               total.push(pathJoin(path, current))
@@ -92,6 +106,10 @@ export default class FileStructureService {
     })
   }
 
+  /**
+   *
+   * @param outFile
+   */
   public packAndClean(outFile: string): Promise<void> {
     if (this.native && this.command?.osType !== 'windows') {
       return new Promise((resolve, reject) => {

@@ -8,6 +8,14 @@ export default class PptxGenerationService {
     private fileStructure;
     private swigRenderer;
     private slides;
+    /**
+     *
+     * @param workingDirectory
+     * @param filePatterns
+     * @param outFile
+     * @param extension
+     * @param native
+     */
     constructor(workingDirectory: string, filePatterns: FilePaths, outFile?: string, extension?: string, native?: boolean);
     private assembleSlidesArray;
     generateContentTypes(): Promise<boolean>;
