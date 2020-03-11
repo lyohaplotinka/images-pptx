@@ -1,0 +1,69 @@
+# images-pptx
+
+### A simple and blazing-fast javascript library for creating PPTX presentation from list of images
+
+If you have a set of raster picture files (for example, after converting PDF to JPG's) and you want to nicely wrap them into PowerPoint presentation–**images-pptx** is everything that you need.
+
+#### Currently works:
+|  **Node.js** | **Browser**  |
+| :------------: | :------------: |
+| Yes  | WIP  |
+
+------------
+
+
+### Installation
+Via `npm`:
+```bash
+npm install --save images-pptx
+```
+
+### Usage
+Add it to your project:
+```javascript
+const ImagesPptx = require('images-pptx')
+```
+After that, you can use it like this:
+```javascript
+await ImagesPptx(options)
+```
+
+Options are:
+
+| **Option**  |  **Description**  |
+| :------------ | :------------ |
+| pictures  | Array of full paths to images (array of string) or single string to the directory where image files are placed  |
+| saveTo | Path to the directory (string) where .pptx file will be created |
+| pptxFileName | Name of .pptx file (string) (default is "presentation.pptx" |
+| extension | Extension of pictures (string) which will be used in pptx (f.e. "jpg") |
+| native | Boolean (default is `false`). Forces `images-pptx` use native OS commands, such as `cp` or `rm` on Mac and Linux instead of Node-based solutions. This solution can be a bit faster.    **WARNING to Windows users:** this functionality was not tested correctly on Windows yet. |
+
+Example usage:
+```javascript
+await ImagesPptx({
+  pictures: '/Users/username/Pictures',
+  saveTo: '/Users/username/Presentation',
+  pptxFileName: 'Our great party.pptx',
+  extension: 'png',
+  native: true
+})
+```
+This will generate file `/Users/username/Presentation/Our great party.pptx` with all the .png files from `/Users/username/Pictures`.
+
+### How fast is it?
+All test were made on MacOS, using `console.time` and `console.timeEnd`
+
+| Options | Result |
+| :------------ | :------------ |
+| 3 pictures, ~8.5mb total; native: false; directory with extension as a path | 453.053ms |
+| 3 pictures, ~8.5mb total; native: true; directory with extension as a path | 335.393ms |
+| 27 pictures, ~49mb total; native: false; directory with extension as a path | 2518.479ms |
+| 27 pictures, ~49mb total; native: true; directory with extension as a path | 1893.986ms |
+| 3 pictures, ~8.5mb total; native: false; array of direct paths | 323.845ms |
+
+### TODO
+1. Browser version of `images-pptx`
+2. Options to set PPTX meta-fields (creation time, author, title)
+
+### Found a bug?
+Feel free to contribute, create an issue or contact me directly. All my contacts are availabe on [my website](https://lyoha.info)
