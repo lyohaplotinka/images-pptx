@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const fs = jest.genMockFromModule('fs')
 
 fs.promises = {

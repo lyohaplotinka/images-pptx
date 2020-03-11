@@ -1,17 +1,17 @@
-/* eslint-disable */
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 /**
  * @jest-environment jsdom
  */
 
-import SwigRenderService from '../src/services/SwigRenderService';
-import { TemplateData } from '../src/interfaces';
+import SwigRenderService from '../src/services/SwigRenderService'
+import { TemplateData } from '../src/interfaces'
 import * as fs from 'fs'
 
 jest.mock('fs')
 
 const TEST_TEMPLATE = {
   path: '/path/to/test/temp',
-  contents: `{% for word in data %}{{word}}{% endfor %}`
+  contents: `{% for word in data %}{{word}}{% endfor %}`,
 }
 
 describe('SwigRenderService.ts', () => {
@@ -27,7 +27,7 @@ describe('SwigRenderService.ts', () => {
   it('Renders template correctly and saves to correct path', async () => {
     const data: TemplateData = {
       // @ts-ignore
-      data: ['one', 'two', 'three']
+      data: ['one', 'two', 'three'],
     }
     await service.renderTemplate(TEST_TEMPLATE, data, 'temp')
     // @ts-ignore

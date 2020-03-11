@@ -1,21 +1,21 @@
-/* eslint-disable */
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
+
 /**
  * @jest-environment jsdom
  */
 
-import FileStructureService from '../src/services/FileStructureService';
-import NativeLaunchService from '../src/services/NativeLaunchService';
+import FileStructureService from '../src/services/FileStructureService'
 
 jest.mock('../src/utils', () => ({
-  ncpCopy: (what: string, where: string) => {
+  ncpCopy: (what: string, where: string): Promise<any> => {
     return Promise.resolve({ what, where })
-  }
+  },
 }))
 jest.mock('fs')
 
-beforeEach( () => {
-  jest.resetModules();
-  jest.resetAllMocks();
+beforeEach(() => {
+  jest.resetModules()
+  jest.resetAllMocks()
 })
 
 describe('FileStructureService', () => {

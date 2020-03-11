@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "lint": "eslint ./src --ext .ts,.js --fix",
+    "lint": "eslint ./src ./tests --ext .ts,.js --fix",
     "test": "jest"
   },
   "keywords": [
