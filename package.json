@@ -23,7 +23,7 @@
     "url": "https://github.com/lyohaplotinka/images-pptx/issues"
   },
   "author": "Lyoha Plotinka",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/archiver": "^3.1.0",
     "@types/jest": "^25.1.4",
