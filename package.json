@@ -14,6 +14,14 @@
     "images",
     "node"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lyohaplotinka/images-pptx.git"
+  },
+  "homepage": "https://github.com/lyohaplotinka/images-pptx",
+  "bugs": {
+    "url": "https://github.com/lyohaplotinka/images-pptx/issues"
+  },
   "author": "Lyoha Plotinka",
   "license": "ISC",
   "devDependencies": {

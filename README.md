@@ -4,6 +4,8 @@
 
 If you have a set of raster picture files (for example, after converting PDF to JPG's) and you want to nicely wrap them into PowerPoint presentation–**images-pptx** is everything that you need.
 
+Use it with pure Node.js or TypeScript: library is written on TS and has all typings.
+
 #### Currently works:
 |  **Node.js** | **Browser**  |
 | :------------: | :------------: |
