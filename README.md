@@ -42,7 +42,7 @@ Options are:
 | pictures  | Array of full paths to images (array of string) or single string to the directory where image files are placed  |
 | saveTo | Path to the directory (string) where .pptx file will be created |
 | pptxFileName | Name of .pptx file (string) (default is "presentation.pptx" |
-| extension | Extension of pictures (string) which will be used in pptx (f.e. "jpg") |
+| extension | Extension of pictures (string, default: "jpg") which will be used in pptx (f.e. "jpg") |
 | native | Boolean (default is `false`). Forces `images-pptx` use native OS commands, such as `cp` or `rm` on Mac and Linux instead of Node-based solutions. This solution can be a bit faster.    **WARNING to Windows users:** this functionality was not tested correctly on Windows yet. |
 
 Example usage:
@@ -69,8 +69,9 @@ All test were made on MacOS, using `console.time` and `console.timeEnd`
 | 3 pictures, ~8.5mb total; native: false; array of direct paths | 323.845ms |
 
 ### TODO
-1. Browser version of `images-pptx`
+1. CLI version
 2. Options to set PPTX meta-fields (creation time, author, title)
+3. Browser version of `images-pptx`
 
 ### Found a bug?
 Feel free to contribute, create an issue or contact me directly. All my contacts are availabe on [my website](https://lyoha.info)
