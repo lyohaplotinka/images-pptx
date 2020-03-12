@@ -15,7 +15,7 @@ Use it with pure Node.js or TypeScript: library is written on TS and has all typ
 
 
 ### Installation
-~~Via `npm`:~~ (Coming soon on NPM!)
+Via `npm`:
 ```bash
 npm install --save images-pptx
 ```
