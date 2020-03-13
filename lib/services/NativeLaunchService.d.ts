@@ -13,6 +13,7 @@ export default class NativeLaunchService {
     private rmFileCommand;
     private rmFolderCommand;
     private zipCommand;
+    private mkdirCommand;
     constructor();
     private initCommands;
     /**
@@ -37,5 +38,10 @@ export default class NativeLaunchService {
      * @param zipFile
      */
     zip(what: string, zipFile: string): Promise<string>;
+    /**
+     * @returns {string} stdout
+     * @param path
+     */
+    mkdir(path: string): Promise<string>;
 }
 export {};

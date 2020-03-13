@@ -5,7 +5,7 @@ import * as archiver from 'archiver'
 import * as rimraf from 'rimraf'
 import NativeLaunchService from './NativeLaunchService'
 
-const { readdir, mkdtemp } = promises
+const { readdir, mkdtemp, mkdir } = promises
 
 export default class FileStructureService {
   public tempPath = ''
@@ -23,9 +23,17 @@ export default class FileStructureService {
 
   private async copyShared(): Promise<void> {
     const sharedDir = pathJoin(__dirname, '../../shared')
+    const pptMediaDir = pathJoin(this.tempPath, 'ppt/media')
+    const pptRelsDir = pathJoin(this.tempPath, 'ppt/_rels')
     if (this.native) {
       await this.command?.copy(sharedDir + '/.', this.tempPath)
-    } else return await ncpCopy(sharedDir, this.tempPath)
+      await this.command?.mkdir(pptMediaDir)
+      await this.command?.mkdir(pptRelsDir)
+    } else {
+      await ncpCopy(sharedDir, this.tempPath)
+      await mkdir(pptMediaDir)
+      await mkdir(pptRelsDir)
+    }
   }
 
   private async copyPictures(): Promise<boolean> {

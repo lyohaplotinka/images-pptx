@@ -22,6 +22,7 @@ export default class NativeLaunchService {
   private rmFileCommand = ''
   private rmFolderCommand = ''
   private zipCommand = ''
+  private mkdirCommand = ''
 
   constructor() {
     const nodeOsType = type()
@@ -41,12 +42,14 @@ export default class NativeLaunchService {
         this.copyFileCommand = this.copyFolderCommand = `cp -R`
         this.rmFileCommand = this.rmFolderCommand = `rm -rf`
         this.zipCommand = `zip -q -r`
+        this.mkdirCommand = `mkdir -p`
         break
       case OS.WIN:
         this.copyFileCommand = `copy`
         this.copyFolderCommand = `Xcopy`
         this.rmFileCommand = `del`
         this.rmFolderCommand = `rmdir`
+        this.mkdirCommand = `mkdir`
         // ZIP is not included well in every WINDOWS version :C
         break
     }
@@ -98,6 +101,15 @@ export default class NativeLaunchService {
   public async zip(what: string, zipFile: string): Promise<string> {
     if (this.osType === OS.WIN) return 'unavailable'
     const command = `cd "${what}" && ${this.zipCommand} "${zipFile}" .`
+    return await this.asyncExec(command)
+  }
+
+  /**
+   * @returns {string} stdout
+   * @param path
+   */
+  public async mkdir(path: string): Promise<string> {
+    const command = `${this.mkdirCommand} "${path}"`
     return await this.asyncExec(command)
   }
 }
