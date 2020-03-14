@@ -49,7 +49,7 @@ export default class FileStructureService {
       .then(() => true)
       .catch(err => {
         console.error(err)
-        return false
+        throw new Error(`Error during copying pictures: "${err.message}"`)
       })
   }
 
@@ -69,15 +69,18 @@ export default class FileStructureService {
       .then(() => true)
       .catch(err => {
         console.log(err)
-        return false
+        throw new Error(`Error during creating slides: "${err.message}"`)
       })
   }
 
   public async makeRequiredStructure(): Promise<boolean> {
-    this.tempPath = await mkdtemp(pathJoin(this.workingDirectory, 'pres.pptx.'))
+    this.tempPath = await mkdtemp(pathJoin(this.workingDirectory, 'pres.pptx.')).catch(err => {
+      console.error(err)
+      throw new Error(`Error during creating temp directory: "${err.message}"`)
+    })
     await this.copyShared().catch(err => {
       console.error(err)
-      return false
+      throw new Error(`Error during creating base file structure: "${err.message}"`)
     })
     return true
   }
@@ -86,7 +89,9 @@ export default class FileStructureService {
     const promisesArray: Promise<boolean>[] = [this.copyPictures(), this.copySlides(this.pictures.length)]
     return Promise.all(promisesArray)
       .then(() => true)
-      .catch(err => err)
+      .catch(err => {
+        throw new Error(`File structure error: "${err.message}"`)
+      })
   }
 
   /**
@@ -109,7 +114,7 @@ export default class FileStructureService {
         })
         .catch(err => {
           console.error(err)
-          reject(err)
+          reject(new Error(`Error during reading files from directory: "${err.message}"`))
         })
     })
   }
@@ -124,7 +129,9 @@ export default class FileStructureService {
         return this.command!.zip(this.tempPath, pathJoin(this.workingDirectory, outFile)).then(() => {
           return this.command!.rm(this.tempPath)
             .then(() => resolve())
-            .catch(err => reject(err))
+            .catch(err => {
+              throw new Error(`Error during native PPTX packing: "${err.message}"`)
+            })
         })
       })
     } else {
@@ -141,7 +148,10 @@ export default class FileStructureService {
         stream.on('close', () => resolve())
         archive.finalize().then(() => {
           rimraf(this.tempPath, error => {
-            if (error) console.error(error)
+            if (error) {
+              console.error(error)
+              throw new Error(`Error during non-native PPTX packing: "${error.message}"`)
+            }
           })
         })
       })

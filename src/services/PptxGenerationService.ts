@@ -86,7 +86,9 @@ export default class PptxGenerationService {
       await this.fileStructure.readFilesFromDirectory(this.filePatterns as string, this.extension)
     }
     this.assembleSlidesArray()
-    await this.fileStructure.makeRequiredStructure()
+    await this.fileStructure.makeRequiredStructure().catch(err => {
+      throw err
+    })
     this.swigRenderer = new SwigRenderService(this.fileStructure.tempPath)
 
     const promisesArray: Promise<boolean>[] = [
@@ -104,12 +106,13 @@ export default class PptxGenerationService {
             return pathJoin(this.workingDirectory, this.outFile)
           })
           .catch(err => {
-            return err.message
+            console.error(err)
+            throw err
           })
       })
       .catch(err => {
         console.error(err)
-        return err.message
+        throw err
       })
   }
 }
