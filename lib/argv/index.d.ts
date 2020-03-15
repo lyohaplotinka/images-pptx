@@ -1,9 +1,9 @@
 declare const argv: {
     [x: string]: unknown;
+    native: boolean;
     pictures: unknown[];
     "out-file-name": string;
     ext: string;
-    native: boolean;
     "save-to": string;
     _: string[];
     $0: string;
