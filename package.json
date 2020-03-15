@@ -1,6 +1,6 @@
 {
   "name": "images-pptx",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A simple javascript library for creating PPTX presentation from list of images",
   "main": "lib/index.js",
   "scripts": {
@@ -31,6 +31,7 @@
     "@types/node": "^13.9.0",
     "@types/rimraf": "^2.0.3",
     "@types/swig": "0.0.29",
+    "@types/yargs": "^15.0.4",
     "@typescript-eslint/eslint-plugin": "^2.22.0",
     "@typescript-eslint/parser": "^2.22.0",
     "eslint": "^6.8.0",
@@ -47,12 +48,16 @@
     "archiver": "^3.1.1",
     "ncp": "^2.0.0",
     "rimraf": "^3.0.2",
-    "swig": "^1.4.2"
+    "swig": "^1.4.2",
+    "yargs": "^15.3.0"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
       "pre-push": "npm run test"
     }
+  },
+  "bin": {
+    "images-pptx": "./lib/cli.js"
   }
 }

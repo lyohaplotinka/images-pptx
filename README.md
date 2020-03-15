@@ -7,9 +7,9 @@ If you have a set of raster picture files (for example, after converting PDF to 
 Use it with pure Node.js or TypeScript: library is written on TS and has all typings.
 
 #### Currently works:
-|  **Node.js** | **Browser**  |
-| :------------: | :------------: |
-| Yes  | WIP  |
+|  **Node.js** | **Browser**  | **CLI** |
+| :------------: | :------------: | :------------: |
+| Yes  | WIP  | Yes |
 
 ------------
 
@@ -57,6 +57,16 @@ await ImagesPptx.createPptx({
 ```
 This will generate file `/Users/username/Presentation/Our great party.pptx` with all the .png files from `/Users/username/Pictures`.
 
+### CLI usage
+You can use `images-pptx` as command-line app. Install it globally or call it from node_modules folder. 
+For example: 
+```bash
+npm install -g images-pptx
+# after installing
+images-pptx --help
+# ...all usage options printed next
+```
+
 ### How fast is it?
 All test were made on MacOS, using `console.time` and `console.timeEnd`
 
@@ -69,9 +79,8 @@ All test were made on MacOS, using `console.time` and `console.timeEnd`
 | 3 pictures, ~8.5mb total; native: false; array of direct paths | 323.845ms |
 
 ### TODO
-1. CLI version
-2. Options to set PPTX meta-fields (creation time, author, title)
-3. Browser version of `images-pptx`
+1. Options to set PPTX meta-fields (creation time, author, title)
+2. Browser version of `images-pptx`
 
 ### Found a bug?
 Feel free to contribute, create an issue or contact me directly. All my contacts are availabe on [my website](https://lyoha.info)
