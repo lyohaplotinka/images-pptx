@@ -56,5 +56,8 @@
       "pre-commit": "npm run lint",
       "pre-push": "npm run test"
     }
+  },
+  "bin": {
+    "images-pptx": "./lib/cli.js"
   }
 }

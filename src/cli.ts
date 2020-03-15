@@ -3,10 +3,11 @@
 import argv from './argv'
 import PptxGenerationService from './services/PptxGenerationService'
 import { promises } from 'fs'
+import { Settings } from './interfaces'
 
 const { lstat } = promises
 
-async function cliWork(): Promise<string | Error> {
+async function cliWork(): Promise<string> {
   const args = argv
   const saveTo = args['save-to']
   let pictures: string | string[] =
@@ -22,10 +23,32 @@ async function cliWork(): Promise<string | Error> {
       }
     }
   }
-  console.log({
+  const pptxFileName = args['out-file-name']
+  const extension = args.ext
+  const native = args.native
+  const settings: Settings = {
     saveTo,
     pictures,
-  })
+    pptxFileName,
+    extension,
+    native,
+  }
+  try {
+    const service = new PptxGenerationService(
+      settings.saveTo,
+      settings.pictures,
+      settings.pptxFileName,
+      settings.extension,
+      settings.native,
+    )
+    return await service.generatePptx()
+  } catch (e) {
+    throw e
+  }
 }
 
 cliWork()
+  .then(result => console.log(`:: Generated PPTX file: ${result}`))
+  .catch(e => {
+    console.error(e)
+  })

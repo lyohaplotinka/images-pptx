@@ -125,7 +125,7 @@ export default class FileStructureService {
    */
   public packAndClean(outFile: string): Promise<void> {
     if (this.native && this.command?.osType !== 'windows') {
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         return this.command!.zip(this.tempPath, pathJoin(this.workingDirectory, outFile)).then(() => {
           return this.command!.rm(this.tempPath)
             .then(() => resolve())

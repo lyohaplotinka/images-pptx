@@ -1,7 +1,10 @@
 declare const argv: {
     [x: string]: unknown;
-    "save-to": string | undefined;
+    native: boolean;
     pictures: unknown[];
+    "out-file-name": string;
+    ext: string;
+    "save-to": string;
     _: string[];
     $0: string;
 };
