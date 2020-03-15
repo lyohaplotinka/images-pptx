@@ -1,6 +1,6 @@
 {
   "name": "images-pptx",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple javascript library for creating PPTX presentation from list of images",
   "main": "lib/index.js",
   "scripts": {
