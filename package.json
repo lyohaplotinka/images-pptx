@@ -42,7 +42,8 @@
     "prettier": "^1.19.1",
     "ts-jest": "^25.2.1",
     "typescript": "^3.8.3",
-    "uglify-js": ">=2.6.0"
+    "uglify-js": ">=2.6.0",
+    "minimist": ">=1.2.2"
   },
   "dependencies": {
     "archiver": "^3.1.1",
