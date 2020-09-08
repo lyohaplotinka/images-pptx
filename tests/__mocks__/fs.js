@@ -15,6 +15,7 @@ fs.promises = {
       data,
     }
   },
+  mkdir: path => Promise.resolve()
 }
 
 module.exports = fs
