@@ -13,6 +13,7 @@ export async function createPptx(settings: Settings): Promise<string | void> {
     settings.pptxFileName,
     settings.extension,
     settings.native,
+    settings.meta,
   )
   try {
     const result = await service.generatePptx()

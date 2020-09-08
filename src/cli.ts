@@ -26,12 +26,22 @@ async function cliWork(): Promise<string> {
   const pptxFileName = args['out-file-name']
   const extension = args.ext
   const native = args.native
+  const author = args.author
+  const title = args.title
+  const revision = args.revision
+  const createdAt = args['created-at']
   const settings: Settings = {
     saveTo,
     pictures,
     pptxFileName,
     extension,
     native,
+    meta: {
+      author,
+      title,
+      revision,
+      createdAt,
+    },
   }
   try {
     const service = new PptxGenerationService(
@@ -40,6 +50,7 @@ async function cliWork(): Promise<string> {
       settings.pptxFileName,
       settings.extension,
       settings.native,
+      settings.meta,
     )
     return await service.generatePptx()
   } catch (e) {

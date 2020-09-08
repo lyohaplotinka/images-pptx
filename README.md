@@ -44,7 +44,7 @@ Options are:
 | pptxFileName | Name of .pptx file (string) (default is "presentation.pptx" |
 | extension | Extension of pictures (string, default: "jpg") which will be used in pptx (f.e. "jpg") |
 | native | Boolean (default is `false`). Forces `images-pptx` use native OS commands, such as `cp` or `rm` on Mac and Linux instead of Node-based solutions. This solution can be a bit faster.    **WARNING to Windows users:** this functionality was not tested correctly on Windows yet. |
-
+| meta | Meta fields for presentation (see below)
 Example usage:
 ```javascript
 await ImagesPptx.createPptx({
@@ -52,10 +52,22 @@ await ImagesPptx.createPptx({
   saveTo: '/Users/username/Presentation',
   pptxFileName: 'Our great party.pptx',
   extension: 'png',
-  native: true
+  native: true,
+  meta: {
+    author: 'Lyoha Plotinka',
+    title: 'Our great party!',
+    revision: 2,
+    createdAt: '2020-09-08T10:24:09.658Z'
+  }
 })
 ```
 This will generate file `/Users/username/Presentation/Our great party.pptx` with all the .png files from `/Users/username/Pictures`.
+
+For every key in `meta` objects there are default values:
+* `Images-pptx presentation` from `title`;
+* `Images-pptx` for `author`;
+* `1` for `revision`;
+* Output from `new Date().toISOString()` for `createdAt`
 
 ### CLI usage
 You can use `images-pptx` as command-line app. Install it globally or call it from node_modules folder. 
@@ -79,8 +91,8 @@ All test were made on MacOS, using `console.time` and `console.timeEnd`
 | 3 pictures, ~8.5mb total; native: false; array of direct paths | 323.845ms |
 
 ### TODO
-1. Options to set PPTX meta-fields (creation time, author, title)
-2. Browser version of `images-pptx`
+1. Browser version of `images-pptx`
+2. Proportional resizing of pictures
 
 ### Found a bug?
 Feel free to contribute, create an issue or contact me directly. All my contacts are availabe on [my website](https://lyoha.info)

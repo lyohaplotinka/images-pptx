@@ -21,7 +21,7 @@ export default class FileStructureService {
     if (this.native) this.command = new NativeLaunchService()
   }
 
-  private async copyShared(): Promise<void> {
+  private async copyShared(): Promise<{ what: string, where: string }> {
     const sharedDir = pathJoin(__dirname, '../../shared')
     const pptMediaDir = pathJoin(this.tempPath, 'ppt/media')
     const pptRelsDir = pathJoin(this.tempPath, 'ppt/_rels')
@@ -33,6 +33,10 @@ export default class FileStructureService {
       await ncpCopy(sharedDir, this.tempPath)
       await mkdir(pptMediaDir)
       await mkdir(pptRelsDir)
+    }
+    return {
+      what: sharedDir,
+      where: this.tempPath
     }
   }
 

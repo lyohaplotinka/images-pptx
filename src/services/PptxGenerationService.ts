@@ -1,5 +1,5 @@
 import { basename, join as pathJoin, extname } from 'path'
-import { FilePaths } from '../interfaces'
+import { FilePaths, PresentationMeta } from '../interfaces'
 import FileStructureService from './FileStructureService'
 import SwigRenderService from './SwigRenderService'
 import Templates from '../includes/templates'
@@ -16,6 +16,7 @@ export default class PptxGenerationService {
    * @param outFile
    * @param extension
    * @param native
+   * @param meta
    */
   constructor(
     private workingDirectory: string,
@@ -23,6 +24,7 @@ export default class PptxGenerationService {
     private outFile = 'presentation.pptx',
     private extension: string = 'jpg',
     private native = false,
+    private meta: PresentationMeta = {},
   ) {}
 
   private assembleSlidesArray(): void {
@@ -65,6 +67,18 @@ export default class PptxGenerationService {
     return await this.swigRenderer.renderTemplate(Templates.PptRelsTemplate, locals, 'presentation.xml.rels')
   }
 
+  public async generatePresentationMeta(): Promise<boolean> {
+    const locals: any = {
+      presentation: {
+        title: this.meta?.title || 'Images-pptx presentation',
+        author: this.meta?.author || 'Images-pptx',
+        createdAt: this.meta?.createdAt || new Date().toISOString(),
+        revision: this.meta?.revision ?? 1,
+      },
+    }
+    return await this.swigRenderer.renderTemplate(Templates.DocPropsCoreTemplate, locals, 'core.xml')
+  }
+
   public async generateSliderRels(): Promise<boolean> {
     let counter = 0
     const promisesArray: Promise<boolean>[] = []
@@ -97,6 +111,7 @@ export default class PptxGenerationService {
       this.generatePptRels(),
       this.generatePresentation(),
       this.generateSliderRels(),
+      this.generatePresentationMeta(),
     ]
     return Promise.all(promisesArray)
       .then(() => {
